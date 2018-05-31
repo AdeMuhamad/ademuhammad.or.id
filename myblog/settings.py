@@ -25,7 +25,7 @@ SECRET_KEY = '4@!=6%kuj!k-3n%0$ffu%z2tz!5z0!c%1e+##(rh%j++##j*e%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ademuhammad.or.id']
+ALLOWED_HOSTS = ['ademuhammad.or.id','*']
 
 
 # Application definition
@@ -77,10 +77,9 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog',
-	'USER': 'pyblog',
-	'PASSWORD': 'pyjscssblog',
-	'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+	'USER': 'postgres',
+	'HOST': 'db',
 	'PORT': '5432',
     }
 }
