@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import environ
+import raven
+
+
+# env configuration
 root = environ.Path(__file__) - 1
 env = environ.Env(DEBUG=(bool, False),) # set default values and casting
 environ.Env.read_env('.env') # reading .env file
@@ -42,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
@@ -113,13 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -128,8 +129,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# SMTP config
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ade.networkers@gmail.com'
 EMAIL_HOST_PASSWORD = 'ade4125solihat'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+RAVEN_CONFIG = {
+    'dsn': 'https://65d44562eda54f8ba4b1900b6ce2c504:61c4ea256c96428288d168187f70a642@sentry.io/1221207',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
