@@ -12,3 +12,13 @@ class PostAdmin(admin.ModelAdmin):
 	raw_id_fields = ['author']
 	ordering = ['status', 'publish']
 admin.site.register(Post, PostAdmin)
+
+
+# Register comment model admin
+from .models import Post, Comment
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'post', 'created', 'active')
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('name', 'email', 'body')
+admin.site.register(Comment, CommentAdmin)

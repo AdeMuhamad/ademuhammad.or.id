@@ -11,6 +11,7 @@ class PublishedManager(models.Manager):
                      self).get_queryset()\
                           .filter(status='published')
 
+#model for post data
 class Post(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
@@ -43,3 +44,19 @@ class Post(models.Model):
                              self.publish.strftime('%m'),
                              self.publish.strftime('%d'),
                              self.slug])
+
+#model for comment system
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.name, self.post)
