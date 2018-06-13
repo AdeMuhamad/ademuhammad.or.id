@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'raven.contrib.django.raven_compat',
+    'taggit',
 ]
 
 MIDDLEWARE = [
