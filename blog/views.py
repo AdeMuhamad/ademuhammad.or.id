@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView
 from .models import Post, Comment
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
@@ -30,6 +31,12 @@ def post_list(request,tag_slug=None):
     return render(request, 'blog/post/list.html', {'page': page,
                                                    'posts': posts,
                                                    'tag': tag})
+
+class PostListView(ListView):
+    queryset = Post.published.all()
+    context_object_name = 'posts'
+    paginate_by = 3
+    template_name = 'blog/post/list.html'
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post,
