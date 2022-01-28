@@ -20,4 +20,10 @@ jobs:
       uses: sonarsource/sonarqube-scan-action@master
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} 
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      with:
+        args: > 
+          -Dsonar.projectKey=Testing 
+          -Dsonar.projectName=Testing 
+          -Dsonar.sources=. 
+          -Dsonar.sourceEncoding=UTF-8 
